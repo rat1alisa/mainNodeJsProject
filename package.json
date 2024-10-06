@@ -1,0 +1,22 @@
+{
+  "name": "nodejs_firstproject",
+  "version": "1.0.0",
+  "description": "First node.js app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rat1alisa/NodeJs.git"
+  },
+  "keywords": [
+    "node.js"
+  ],
+  "author": "Alice",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rat1alisa/NodeJs/issues"
+  },
+  "homepage": "https://github.com/rat1alisa/NodeJs#readme"
+}

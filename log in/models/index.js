@@ -3,8 +3,8 @@ const express = require('express');
 const app = express();
 const handlebars = require('express-handlebars');
 
-import { homeRouter } from "./routes/controller.js";
-import { authMiddleware } from "./middleware/authMiddleware.js";
+import { homeRouter } from "../routes/controller.js";
+import { authMiddleware } from "../middleware/authMiddleware.js";
 import dotenv from 'dotenv';
 
 dotenv.config();

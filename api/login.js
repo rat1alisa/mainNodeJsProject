@@ -5,16 +5,6 @@ const cleanInput = () => {
   }
 
 
-  /* axios({
-  method: 'post',
-  url: '/login',
-  data: {
-    firstname: 'Alice',
-    lastname: 'Alekseeva',
-  }
-});*/
-
-
 /*AXIOS POST LOGIN*/
 
 axios.post('/login', {
@@ -27,6 +17,15 @@ axios.post('/login', {
 .catch(error => {
   console.log(error);
 });
+
+ /* axios({
+  method: 'post',
+  url: '/login',
+  data: {
+    firstname: 'Alice',
+    lastname: 'Alekseeva',
+  }
+});*/
 
 
 /*AXIOS GET LOGIN*/

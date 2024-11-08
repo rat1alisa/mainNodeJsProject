@@ -1,4 +1,4 @@
-const http = require("http");
+/*const http = require("http");
 const express = require('express');
 const app = express();
 const handlebars = require('express-handlebars');
@@ -71,7 +71,47 @@ async function main(){
 };
 
 main();
+*/
 
 
+const express = require('express');
+const exphbs = require('express-handlebars').engine;
+const path = require('path');
+const bodyParser = require('body-parser');
+require('dotenv').config();
+
+const app = express();
+
+
+app.engine('hbs', exphbs({
+     extname: 'hbs', 
+     defaultLayout: 'main', 
+     layoutsDir: path.join(__dirname, 'views/layouts') 
+    }));
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'views'));
+
+app.get('/', (req, res) => {
+  res.render('home', {
+    title: 'Home Page', message: 'My first Node.js Express HBS app' });
+});
+
+app.get('/login', (req, res) => {
+  res.render('login', { title: 'Login' });
+});
+
+app.get('/registration', (req, res) => {
+    res.render('registration', { title: 'Registration' });
+  });
+
+  app.get('/error', (req, res) => {
+    res.render('error', { title: '404' });
+  });
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
 
 //node server.js
+

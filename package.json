@@ -2,7 +2,7 @@
   "name": "nodejs_firstproject",
   "version": "1.0.0",
   "description": "First node.js app",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
@@ -24,15 +24,18 @@
   "dependencies": {
     "-": "^0.0.1",
     "axios": "^1.7.7",
+    "body-parser": "^1.20.3",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "express-handlebars": "^8.0.1",
     "express-session": "^1.18.1",
     "mysql2": "^3.11.4",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
-    "save": "^2.9.0"
+    "save": "^2.9.0",
+    "sequelize": "^6.37.5"
   },
   "devDependencies": {
     "nodemon": "^3.1.7"

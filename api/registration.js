@@ -35,7 +35,7 @@ axios.get('https://api.exaple.com/', {registration_params});
 
 
 //FETCH POST
-
+/*
 let fetch_registration_response = await fetch('/article/fetch/post/user', {
   method: 'POST',
   headers: {
@@ -133,3 +133,4 @@ function validatePassword2() {
   alert('Данные отправлены'); 
   return true; 
 }
+*/

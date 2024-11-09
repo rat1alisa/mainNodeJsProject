@@ -28,7 +28,7 @@ axios.post('/login', {
 });*/
 
 
-/*AXIOS GET LOGIN*/
+//AXIOS GET LOGIN
 
 const params = {
   email: '',
@@ -38,8 +38,8 @@ const params = {
 axios.get('https://api.example.com/', {params});
 
 
-/*FETCH LOGIN POST*/
-
+//FETCH LOGIN POST
+/*
 let login = {
   email: '',
   password: '',
@@ -56,7 +56,7 @@ let response = await fetch('/article/fetch/post/user', {
 let result = await response.json();
 alert(result.massage);
 
-/*FETCH LOGIN GET*/
+//FETCH LOGIN GET
 
 fetch('https:://example.com/ajax.php')
 .then(response => {
@@ -66,7 +66,7 @@ fetch('https:://example.com/ajax.php')
   console.dir(data);
 });
 
-/*JS LOGIN POST*/
+//JS LOGIN POST
 
 const https = require('https');
 const data = JSON.stringify ({
@@ -96,7 +96,7 @@ req.write(data)
 req.end()
 
 
-/*JS LOGIN GET*/
+//JS LOGIN GET
 
 const https = require('https');
 const data1 = JSON.stringify ({
@@ -119,5 +119,5 @@ req1.on('error', (error) => {
   console.error(error)
 })
 req1.end()
-
+*/
 //----------

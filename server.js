@@ -1,3 +1,4 @@
+const http = require('http');
 const express = require('express');
 const exphbs = require('express-handlebars').engine;
 const path = require('path');
@@ -5,22 +6,25 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 
 const app = express();
- 
-app.use(express.static(path.join(__dirname, 'public')));
-// Parse application/x-www-form-urlencoded 
-app.use(bodyParser.urlencoded({ extended: true}));
+
+//const hostname = '127.0.0.1';
+//const port = 3000;
 
 app.engine('hbs', exphbs({
-     extname: 'hbs', 
-     defaultLayout: 'main', 
-     layoutsDir: path.join(__dirname, 'views/layouts') 
-    }));
+  extname: 'hbs', 
+  defaultLayout: 'main', 
+  layoutsDir: path.join(__dirname, 'views/layouts') 
+ }));
+
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
+ 
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.get('/', (req, res) => {
-  res.render('home', {
-    title: 'Home Page', message: 'My first Node.js Express HBS app' });
+  res.render('mai', {
+    title: 'Home', message: 'You did it' });
 });
 
 app.get('/login', (req, res) => {
@@ -31,157 +35,48 @@ app.get('/registration', (req, res) => {
   res.render('registration', { title: 'Registration Page' });
 }); 
 
+app.post('/login', (req, res) =>{
+  const {email, password} = req.body; 
+  if (email && password) {
+    console.log(`You logged in successfully:)`);
+    return res.redirect('/');
+  }
+  else { 
+    return res.status(400).send('Login failed:('); 
+``}
+});
+
+
 app.post('/registration', (req, res) => { 
-    const { username, password, email, birthdate, photo } = req.body; 
-    if (username && password && email) { 
-        console.log(`User registered successfully! Username: ${username}`);
+    const { photo, name, surname,birthday, email, password} = req.body; 
+    if (name && password && email) { 
+        console.log(`Registration was successful:)`);
         return res.redirect('/');
     }
     else { 
-        return res.status(400).send('Registration failed. Missing required fields.'); 
+        return res.status(400).send('Registration failed:('); 
     }
 });
 
 app.use((req, res, next) => {
-    res.status(404).render('404', { title: '404 - Page Not Found' });
+    res.status(404).render('404', { title: 'Not Found' });
   });
 
 const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 
 
-/*const express = require('express');
-const exphbs = require('express-handlebars').engine;
-const path = require('path');
-const bodyParser = require('body-parser');
-require('dotenv').config();
-
-const app = express();
- 
-app.use(express.static(path.join(__dirname, 'public')));
-// Parse application/x-www-form-urlencoded 
-app.use(bodyParser.urlencoded({ extended: true}));
-
-app.engine('hbs', exphbs({
-     extname: 'hbs', 
-     defaultLayout: 'main', 
-     layoutsDir: path.join(__dirname, 'views/layouts') 
-    }));
-app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'views'));
-
-app.get('/', (req, res) => {
-  res.render('home', {
-    title: 'Home Page', message: 'My first Node.js Express HBS app' });
-});
-
-app.get('/login', (req, res) => {
-  res.render('login', { title: 'Login Page' });
-});
-
-app.get('/registration', (req, res) => {
-  res.render('registration', { title: 'Registration Page' });
-}); 
-
-app.post('/registration', (req, res) => { 
-    const { username, password, email, birthdate, photo } = req.body; 
-    if (username && password && email) { 
-        console.log(`User registered successfully! Username: ${username}`);
-        return res.redirect('/');
-    }
-    else { 
-        return res.status(400).send('Registration failed. Missing required fields.'); 
-    }
-});
-
-app.use((req, res, next) => {
-    res.status(404).render('404', { title: '404 - Page Not Found' });
-  });
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});*/
-
-//node server.js
-
-
-
-
-
-/*const http = require("http");
-const express = require('express');
-const app = express();
-const handlebars = require('express-handlebars');
-
-import { homeRouter } from "../routes/controller.js";
-import { authMiddleware } from "../middleware/authMiddleware.js";
-import dotenv from 'dotenv';
-import { hasSubscribers } from "diagnostics_channel";
-
-dotenv.config();
-
-const hostname = "127.0.0.1";
-const port = 3000;
-
-
-app.set("view engine", "handlebars");
-handlebars.registerPartials(__dirname + "/views/partials");
-
-app.engine(
-    'handlebars',
-    handlebars.engine({defaultLayout: 'main'})
-);
-
-app.set('views', './views');
-app.set('view', 'handlebars');
-
-app.get('/', (req, res) => {
-    res.render('home', {
-        title: 'Greetings form Handlebars',
-    });
-});
-
-app.use("/contacts", function (req, res){
-
-    res.render("contacts", {
-        title: "Contacts",
-        email: "alekseevaalisa763@gmail.com",
-        phone: "+375(29)5275285",
-    });
-});
-
-app.use("/", function(req, res){
-
-    res.render("home.hbs");
-});
-
-app.listen(3000);
-
-
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "text/plain");
-  res.end("Hello, World!\n");
+/*const server = http.createServer((req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('Hello, World!\n');
 });
 
 server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
-
-async function main(){
-    app.use(express.json());
-    app.use('/api', authMiddleware, homeRouter);
-    app.use('*', (req, res) => {
-        res.status(201).json({message : 'Not found'})
-    });
-
-    app.listen(process.env.Port || 4200, ()=>{
-        console.log(`Server running at ${process.env.PORT} port`)
-    });
-};
-
-main();
-*/
+    console.log(
+        `Server running at http://${hostname}:${port}/`
+    );
+});*/

@@ -3,6 +3,7 @@ const express = require('express');
 const exphbs = require('express-handlebars').engine;
 const path = require('path');
 const bodyParser = require('body-parser');
+const sequelize = require('./config/db.config');
 require('dotenv').config();
 
 const app = express();
@@ -48,7 +49,7 @@ app.post('/login', (req, res) =>{
 
 
 app.post('/registration', (req, res) => { 
-    const { photo, name, surname,birthday, email, password} = req.body; 
+    const { photo, name, surname, birthday, email, password} = req.body; 
     if (name && password && email) { 
         console.log(`Registration was successful:)`);
         return res.redirect('/');
@@ -57,6 +58,14 @@ app.post('/registration', (req, res) => {
         return res.status(400).send('Registration failed:('); 
     }
 });
+
+sequelize.sync() 
+  .then(() => { 
+    console.log('Database & tables created!'); 
+  }) 
+  .catch((err) => { 
+    console.error('Error creating database:', err); 
+  });
 
 app.use((req, res, next) => {
     res.status(404).render('error', { title: 'Not Found' });

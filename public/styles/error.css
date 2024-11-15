@@ -10,6 +10,19 @@ html, body{
     background-color: #ffeba7;
 }
 
+.faculty-glyphic-regular {
+  font-family: "Faculty Glyphic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1{
+  font-family: "Faculty Glyphic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 50px;
+}
+
 .mainErrorBlock{
     display: flex;
     align-items: center;
@@ -26,7 +39,7 @@ html, body{
     position: relative;
     width: 12em;
     height: 12em;
-    font-size: 14px;
+    font-size: 24px;
   }
   
   .wheel,

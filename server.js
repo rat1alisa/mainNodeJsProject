@@ -6,6 +6,9 @@ const bodyParser = require('body-parser');
 const sequelize = require('./config/db.config');
 require('dotenv').config();
 
+const viewRoutes = require('./routes/index');
+const apiRoutes = require('./api/users');
+
 const app = express();
 
 //const hostname = '127.0.0.1';
@@ -20,11 +23,45 @@ app.engine('hbs', exphbs({
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
- 
+
+app.use('/', viewRoutes); 
+app.use('/api', apiRoutes);
+
 // app.use(express.static(path.join(__dirname, 'public')));
 
+sequelize.sync() 
+  .then(() => { 
+    console.log('Database & tables created!'); 
+  }) 
+  .catch((err) => { 
+    console.error('Error creating database:', err); 
+  });
 
-app.get('/', (req, res) => {
+
+app.use((req, res, next) => {
+    res.status(404).render('error', { title: 'Not Found' });
+  });
+
+const PORT = 3000;
+
+app.listen(PORT, () => {
+  console.log(`:) Server is running on http://localhost:${PORT}`);
+});
+
+
+/*const server = http.createServer((req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('Hello, World!\n');
+});
+
+server.listen(port, hostname, () => {
+    console.log(
+        `Server running at http://${hostname}:${port}/`
+    );
+});*/
+
+/*app.get('/', (req, res) => {
   res.render('home', {
     title: 'Home Page'});
 });
@@ -58,34 +95,4 @@ app.post('/registration', (req, res) => {
         return res.status(400).send('Registration failed:('); 
     }
 });
-
-sequelize.sync() 
-  .then(() => { 
-    console.log('Database & tables created!'); 
-  }) 
-  .catch((err) => { 
-    console.error('Error creating database:', err); 
-  });
-
-app.use((req, res, next) => {
-    res.status(404).render('error', { title: 'Not Found' });
-  });
-
-const PORT = 3000;
-
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
-
-
-/*const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello, World!\n');
-});
-
-server.listen(port, hostname, () => {
-    console.log(
-        `Server running at http://${hostname}:${port}/`
-    );
-});*/
+*/

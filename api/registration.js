@@ -11,8 +11,11 @@ const cleanInput = () => {
 axios.post('/registration', {
   name: '',
   surname: '',
-  dateOfBirth: '',
+  birthday: '',
+  email: '',
+  photo: '',
   password: '',
+  rePassword: '',
 })
 .then((registration_response) => {
   console.log(registration_response);
@@ -27,8 +30,11 @@ axios.post('/registration', {
 const registration_params = {
   name: '',
   surname: '',
-  dateOfBirth: '',
+  birthday: '',
+  email: '',
+  photo: '',
   password: '',
+  rePassword: '',
 };
 
 axios.get('https://api.exaple.com/', {registration_params});

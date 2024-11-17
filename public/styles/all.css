@@ -3,7 +3,7 @@ html, body{
     padding: 0;
     width: 100%;
     height: 100%;
-    /*background-color: #ffeba7;*/
+    background-color: #ffeba7;
 }
 
 /* customizable snowflake styling */
@@ -28,3 +28,9 @@ html, body{
   font-family: 'Raleway', sans-serif;
 color: #000;		
 }
+
+/*.layoutContainer{
+  width: 100%;
+  height: 100%;
+  display: flex;
+}*/
